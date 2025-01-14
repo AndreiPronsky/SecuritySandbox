@@ -1,0 +1,25 @@
+services:
+
+  database:
+    container_name: security-sandbox-db
+    image: postgres
+    environment:
+      POSTGRES_DB: security-sandbox-db
+      POSTGRES_USER: dbuser
+      POSTGRES_PASSWORD: dbpassword
+    ports:
+      - "5432:5432"
+
+  application:
+    container_name: security_sandbox
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      DATABASE_URL: jdbc:postgresql://database:5432/security-sandbox-db
+      DATABASE_USERNAME: dbuser
+      DATABASE_PASSWORD: dbpassword
+    ports:
+      - "9002:9002"
+    depends_on:
+      - database

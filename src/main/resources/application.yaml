@@ -1,1 +1,14 @@
-spring.application.name=SecuritySandbox
+server:
+  port: 9002
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/security-sandbox-db}
+    username: ${DATABASE_USERNAME:dbuser}
+    password: ${DATABASE_PASSWORD:dbpassword}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  liquibase:
+    enabled: true
